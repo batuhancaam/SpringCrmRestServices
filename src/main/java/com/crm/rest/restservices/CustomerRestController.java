@@ -3,10 +3,7 @@ package com.crm.rest.restservices;
 import com.crm.rest.entity.Customer;
 import com.crm.rest.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,5 +30,15 @@ public class CustomerRestController {
             throw  new CustomerNotFoundException("Customer id not found " + customerId);
         }
         return customer;
+    }
+
+    @PostMapping("customers")
+    public Customer addCustomer(@RequestBody Customer customer){
+
+        customer.setId(0);
+        customerService.saveCustomer(customer);
+
+        return customer;
+
     }
 }
