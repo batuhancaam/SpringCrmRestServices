@@ -32,7 +32,7 @@ public class CustomerRestController {
         return customer;
     }
 
-    @PostMapping("customers")
+    @PostMapping("/customers")
     public Customer addCustomer(@RequestBody Customer customer){
 
         customer.setId(0);
@@ -40,5 +40,21 @@ public class CustomerRestController {
 
         return customer;
 
+    }
+
+    @PutMapping("/customers")
+    public Customer updateCustomer(@RequestBody Customer customer){
+        customerService.saveCustomer(customer);
+
+        return customer;
+
+    }
+
+    @DeleteMapping("/customers/{customerId}")
+    public String deleteCustomer (@PathVariable int customerId){
+
+        customerService.deleteCustomer(customerId);
+
+        return "Deleted customer id " + customerId;
     }
 }
